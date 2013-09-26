@@ -3,7 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Senny's Web App</title>
-	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -24,13 +24,14 @@
 		<section data-route="schedule" class="active">
 			<h1 data-bind="title"></h1>
 			<table>	
-			    <tr>
-			        <th>Monday 18 March</th>
-			        <th>Team</th>
-			        <th>Result</th>
-			        <th>Team</th>
-			    </tr>
-			    
+				<thead>
+				    <tr>
+				        <th>Monday 18 March</th>
+				        <th>Team</th>
+				        <th>Result</th>
+				        <th>Team</th>
+				    </tr>
+				</thead>
 			    <tbody data-bind="items">
 					<tr>
 						<td data-bind="date"></td>
@@ -47,13 +48,15 @@
 		<section data-route="game">
 			<h1 data-bind="title"></h1>
 			<table>	
-			    <tr>
-                    <th>Score</th>
-                    <th>Team</th>
-                    <th>Points</th>
-                    <th>Team</th>
-			    </tr>
-			    
+				<thead>
+				    <tr>
+	                    <th>Score</th>
+	                    <th>Team</th>
+	                    <th>Points</th>
+	                    <th>Team</th>
+				    </tr>
+				</thead>
+				
 			    <tbody data-bind="items">
 					<tr>
 						<td data-bind="score"></td>
@@ -69,15 +72,17 @@
 		<section data-route="ranking">
 			<h1 data-bind="title"></h1>
 			<table>	
-			    <tr>
-                    <th>Team</th>
-                    <th>W</th>
-                    <th>L</th>
-                    <th>Points won</th>
-                    <th>Points lost</th>
-                    <th>+/-</th>
-			    </tr>
-			    
+				<thead>
+				    <tr>
+	                    <th>Team</th>
+	                    <th>W</th>
+	                    <th>L</th>
+	                    <th>Points won</th>
+	                    <th>Points lost</th>
+	                    <th>+/-</th>
+				    </tr>
+				</thead>
+				
 			    <tbody data-bind="items">
 					<tr>
 						<td data-bind="team"></td>

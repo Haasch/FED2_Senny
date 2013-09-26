@@ -3,7 +3,7 @@
 var APP = APP || {};
 
 (function () {
-	// Scrict zorgt ervoor dat er extra goed gelet wordt op fouten. (semicolon en etc.)
+	// Scrict zorgt ervoor dat er extra goed gelet wordt op fouten. (semicolon, komma's en etc.)
 	'use strict';
 
 	// Data objecten: Schedule, Game & Ranking. Allemaal literal objecten.
@@ -119,7 +119,7 @@ var APP = APP || {};
 	// Page object
     APP.page = {
         schedule: function() {
-        	// Zorgt voor data binding.
+        	// Zorgt voor data binding. Linkt DOM elementen met JSON.
             Transparency.render(qwery('[data-route=schedule]')[0], APP.schedule);
             APP.router.change();
         },
@@ -133,7 +133,7 @@ var APP = APP || {};
         }
     }
     
-	// DOM ready functie.
+	// DOM ready functie. Als pagina geladen is > start applicatie.
 	domready(function () {
 		// Start controler en daarbij dus de hele applicatie
 		APP.controller.init();
