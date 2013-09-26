@@ -6,7 +6,7 @@ var APP = APP || {};
 	// Scrict zorgt ervoor dat er extra goed gelet wordt op fouten. (semicolon, komma's en etc.)
 	'use strict';
 
-	// Data objecten: Schedule, Game & Ranking. Allemaal literal objecten.
+	// Literal data object 'schedule'.
 	APP.schedule = {
 		title:'Pool A - Schedule',
 		items: [ // Array met Properties en value's 
@@ -23,7 +23,7 @@ var APP = APP || {};
 	    ]
 	};
 
-
+	// Literal data object 'game'.
 	APP.game = {
 		title:'Pool A - Score: Boomsquad vs. Burning Snow',
         items: [
@@ -53,6 +53,7 @@ var APP = APP || {};
 	    ]
 	};
 
+	//Literal data object 'ranking'.
 	APP.ranking = {
 		title:'Pool A - Ranking',
 		items: [
@@ -64,18 +65,15 @@ var APP = APP || {};
 	    ]
 	};
 	
-	// Controller object. Start de flow van de applicatie.
-	APP.controller = {
+	// Literal controller object. Start de flow van de applicatie.
+	APP.initialiser = {
 		init: function () {
-			// Initialiseer object router met daarin routie!
+			// Start/initialiseer object router met daarin routie.
 			APP.router.init();
-		},
-		// Zet de router functie weer uit.
-		exit: function () {
 		}
 	};
 
-	// Object router. Literal.
+	// Literal object router.s
 	APP.router = {
 		init: function () {
 		//Routie zorgt ervoor dat je op dezelfde pagina kan blijven door achter de link een # toe te voegen.
@@ -116,10 +114,10 @@ var APP = APP || {};
             }
 		}
 	};
-	// Page object
+	// Page (literal) object.
     APP.page = {
-        schedule: function() {
-        	// Zorgt voor data binding. Linkt DOM elementen met JSON.
+        schedule: function() { // Method
+        	// Qwery zorgt ervoor dat het DOM elementen zoekt en selecteert. Transparancy zorgt voor data binding (linkt DOM elementen met JSON).
             Transparency.render(qwery('[data-route=schedule]')[0], APP.schedule);
             APP.router.change();
         },
@@ -135,7 +133,7 @@ var APP = APP || {};
     
 	// DOM ready functie. Als pagina geladen is > start applicatie.
 	domready(function () {
-		// Start controler en daarbij dus de hele applicatie
+		// Start/initialiseer controller en daarbij dus de hele applicatie
 		APP.controller.init();
 	});
 	
