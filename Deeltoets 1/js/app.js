@@ -9,7 +9,7 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
 (function () {
 
 	// Scrict zorgt ervoor dat er extra goed gelet wordt op fouten. (semicolon, komma's en etc.)
-	'use strict';
+	//'use strict';
 
 	/*************************************************** 
 		Objecten met JSON data. 
@@ -157,6 +157,9 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
 			name:     'world!'
 			};
 			$('#template').render(hello); //jQuery DOM selector
+			of 
+			
+			Transparency.render(document.getElementById('activities'), activities);
 			
         */      
         
@@ -202,6 +205,7 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
 			alert (res);
 		});
 	*/
+	
 	
 	
 	/* JXS Ajax script werking:
