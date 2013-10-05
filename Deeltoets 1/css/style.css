@@ -57,12 +57,19 @@ ul {
 			background-color: #eee;
 		}
 
+section { 
+	overflow: hidden;
+}
+
 section img, video {
 	max-width: 100%;
 	border:10px solid #eee;
 	box-shadow:0 0 5px #aaa;
 	border-radius: 5px;
 	margin-bottom: 1em;
+	margin-right: 1.5em;
+	float: left;
+	overflow: hidden;
 }
 video {
 	width:100%;
@@ -80,6 +87,7 @@ figcaption {
 header {
 	position:relative;
 	padding:0 .5em;
+	padding-left: 0;
 }
 	header img {
 		opacity:.3;
@@ -95,7 +103,6 @@ header {
 		font-family: "Marker Felt";
 		color:#000;
 		font-size: 1.6em;
-		margin-left:2.5em;
 
 	}
 

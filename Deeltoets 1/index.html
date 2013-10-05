@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Frisbee App</title>
+	<title>Senny's App</title>
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	
 </head>
@@ -17,6 +17,7 @@
 				<li><a href="#/game">Game</a></li>
 				<li><a href="#/ranking">Ranking</a></li>
 				<li><a href="#/films">Films</a></li>
+				<li><a href="#/leaguevine">Leaguevine</a></li>
 			</ul>
 		</nav>
 
@@ -102,10 +103,48 @@
 			<h1 data-bind="mainTitle"></h1>
 			
 			<section data-bind="items">
-				<h2 data-bind="title"></h2>		
-				<img data-bind="cover" alt="" />	
+				<img data-bind="cover" src="" alt="" />
+				<h2 data-bind="title"></h2>
+				<p data-bind="description"></p>	
+				<p data-bind="release_date"></p>
+				
+				<p> Rating: </p>
+				<div data-bind="reviews"> 
+					<span data-bind="score"> </span> |
+				</div>		
 			</section>
 		</section>
+		
+		
+		<section data-route="leaguevine">			
+			<h1 data-bind="mainTitle"></h1>
+			
+			<table>	
+				<thead>
+				    <tr>
+	                    <th>Team</th>
+	                    <th>Seed</th>
+	                    <th>Result (Final Placement)</th>
+	                    <th>Links</th>
+	                    <th>Twitter</th>
+				    </tr>
+				</thead>								
+				
+			    <tbody data-bind="objects">
+					<tr data-bind="team">
+						<td data-bind="name"></td>
+						<td data-bind="seed"></td>
+						<td data-bind="Result (Final Placement)"></td>
+						<td> <a target="_blank" data-bind="leaguevine_url">Link</a></td>
+						<td data-bind="Twitter"></td>				
+					</tr>	
+			    </tbody>
+			    
+			</table>
+
+		</section>
+		
+		
 				
 		
 	</article>

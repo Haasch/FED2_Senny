@@ -3,13 +3,14 @@
 	NAMESPACE 
 ***************************************************/
 
-var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt binnen de Window. Hierdoor kan je conflicten voorkomen. Maar nooit 100%.
+var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt binnen de Window. Hierdoor kan je conflicten voorkomen. Maar nooit 100%.
 
 
 (function () {
 
 	// Scrict zorgt ervoor dat er extra goed gelet wordt op fouten. (semicolon, komma's en etc.)
-	//'use strict';
+	
+	'use strict';
 
 	/*************************************************** 
 		Objecten met JSON data. 
@@ -71,13 +72,42 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
 	};
 	
 	APP.films = new Object(); 	// Constructor object 'films'.
-    	APP.films.mainTitle = 'ARGH';
+    	APP.films.mainTitle = 'Films';
     	APP.films.items = function() { 
-	    	jx.load('http://dennistel.nl/movies',function(data){
-				return(data);
+	    	jx.load('http://dennistel.nl/movies', function(data) {
+				var data = JSON.parse(data); // Maak er JSON objecten van				
+				var directives = { 
+					cover: {
+					    src: function() {
+					    return this.cover;
+					    }
+					}
+				};
+				
+			Transparency.render(qwery('[data-route=films]')[0], data, directives);
 			},'text','get');     		    	
     	};	
 		
+		
+		APP.leaguevine = new Object(); 	// Constructor object 'leaguevine'.
+		    APP.leaguevine.mainTitle = 'Leaguevine';
+	    	APP.leaguevine.items = function() { 
+		    	jx.load('https://api.leaguevine.com/v1/tournament_teams/?tournament_ids=%5B19389%5D&access_token=40e50065ad', function(data) {
+					var data = JSON.parse(data); // Maak er JSON objecten van
+					console.log(data);
+					var directives = { //Verander het data-binden
+						objects: { team: { leaguevine_url: { //Structuur van JSON objecten. (objects > teams > leaguevine).
+					    	href: function() {
+							return this.leaguevine_url;
+							},
+							html: function(){
+							return "Link";	
+							} } } }
+					};
+				Transparency.render(qwery('[data-route=leaguevine]')[0], data, directives);
+				},'text','get');     		    	
+			};	
+			
 
 		
 	/*************************************************** 
@@ -113,6 +143,9 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
 			    },
 			    '/films': function() { //NIEUW
 			    	APP.page.films();
+			    },
+			    '/leaguevine': function() { //NIEUW
+			    	APP.page.leaguevine();
 			    },
 			    '*': function() {
 			    	APP.page.schedule();
@@ -156,10 +189,12 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
 			greeting: 'Hello',
 			name:     'world!'
 			};
+			
 			$('#template').render(hello); //jQuery DOM selector
+			
 			of 
 			
-			Transparency.render(document.getElementById('activities'), activities);
+			Transparency.render(document.getElementById('activities'), activities); //No JavaScript selector
 			
         */      
         
@@ -176,7 +211,11 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
             APP.router.change();
         },
         films: function() {
-            Transparency.render(qwery('[data-route=films]')[0], APP.films, APP.films.items());
+			APP.films.items();
+            APP.router.change();
+        },
+        leaguevine: function() {
+            APP.leaguevine.items()
             APP.router.change();
         }
     };
@@ -204,8 +243,7 @@ var APP = APP || {}; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt b
 		microAjax("/resource/url", function (res) {
 			alert (res);
 		});
-	*/
-	
+	*/	
 	
 	
 	/* JXS Ajax script werking:
