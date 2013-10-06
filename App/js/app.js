@@ -3,18 +3,18 @@
 	NAMESPACE 
 ***************************************************/
 
-var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt binnen de Window. Hierdoor kan je conflicten voorkomen. Maar nooit 100%.
+var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een nieuwe ruimte maakt binnen de 'window'. Hierdoor kan je conflicten voorkomen. Maar nooit 100%.
 
 
 (function () {
-
-	// Scrict zorgt ervoor dat er extra goed gelet wordt op fouten. (semicolon, komma's en etc.)
 	
-	'use strict';
+	'use strict'; 	// Scrict is een nieuwe feature in ECMAScript 5. daarmee kunnen we een programma of een functie in strict javascripttaal plaatsen. Het kijkt naar: fouten en schakelt features uit die slecht zijn bedacht. 
+
 
 	/*************************************************** 
-		Objecten met JSON data. 
+		Objecten met (JSON) data. 
 	***************************************************/
+	
 	APP.schedule = { 	// Literal data object 'schedule'.
 		mainTitle:'Pool A - Schedule',
 		items: [ // Array met Properties en value's 
@@ -30,6 +30,7 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
 		    { date: "Monday, 1:00pm", team1: "Burning Snow", team1Score: "15", team2: "Amsterdam Money Gang", team2Score: "11" }
 	    ]
 	};
+	
 	
 	APP.game = { 	// Literal data object 'game'.
 		mainTitle:'Pool A - Score: Boomsquad vs. Burning Snow',
@@ -72,41 +73,44 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
 	};
 	
 	APP.films = new Object(); 	// Constructor object 'films'.
+		// Properties:
     	APP.films.mainTitle = 'Films';
-    	APP.films.items = function() { 
+    	APP.films.items = function() { 		
 	    	jx.load('http://dennistel.nl/movies', function(data) {
-				var data = JSON.parse(data); // Maak er JSON objecten van				
-				var directives = { 
+				var data = JSON.parse(data); // Maak er JSON objecten van	
+				//console.log(data); //log wat er in de parameter 'data' zit			
+				var directives = { //Verander de manier van data-binden
 					cover: {
 					    src: function() {
-					    return this.cover;
+					    return this.cover; //return de property 'cover' van het JSON object.
 					    }
 					}
 				};
 				
 			Transparency.render(qwery('[data-route=films]')[0], data, directives);
-			},'text','get');     		    	
+			},'text','get'); //Haal data op als text.    		    	
     	};	
 		
 		
-		APP.leaguevine = new Object(); 	// Constructor object 'leaguevine'.
-		    APP.leaguevine.mainTitle = 'Leaguevine';
-	    	APP.leaguevine.items = function() { 
-		    	jx.load('https://api.leaguevine.com/v1/tournament_teams/?tournament_ids=%5B19389%5D&access_token=40e50065ad', function(data) {
-					var data = JSON.parse(data); // Maak er JSON objecten van
-					console.log(data);
-					var directives = { //Verander het data-binden
-						objects: { team: { leaguevine_url: { //Structuur van JSON objecten. (objects > teams > leaguevine).
-					    	href: function() {
-							return this.leaguevine_url;
-							},
-							html: function(){
-							return "Link";	
-							} } } }
-					};
-				Transparency.render(qwery('[data-route=leaguevine]')[0], data, directives);
-				},'text','get');     		    	
-			};	
+	APP.leaguevine = new Object(); 	// Constructor object 'leaguevine'.
+		// Properties:
+	    APP.leaguevine.mainTitle = 'Leaguevine';
+    	APP.leaguevine.items = function() { 
+	    	jx.load('https://api.leaguevine.com/v1/tournament_teams/?tournament_ids=%5B19389%5D&access_token=40e50065ad', function(data) {
+				var data = JSON.parse(data); // Maak er JSON objecten van
+				//console.log(data); //log wat er in de parameter 'data' zit	
+				var directives = { //Verander de manier van data-binden
+					objects: { team: { leaguevine_url: { //Structuur van de JSON objecten. (objects > teams > leaguevine).
+				    	href: function() {
+						return this.leaguevine_url; //return de property 'leaguevine_url' van het JSON object.
+						},
+						html: function(){
+						return "Link";	
+						}}}}
+				};
+			Transparency.render(qwery('[data-route=leaguevine]')[0], data, directives);
+			},'text','get'); //Haal data op als text.       		    	
+		};	
 			
 
 		
@@ -114,8 +118,8 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
 		START de flow van de APP.
 	***************************************************/
 	
-	APP.flow = { 	// Literal object: initialiser. Vuur af!
-		init: function () {	// Start/initialiseer object router met daarin routie.
+	APP.flow = { 	// Literal object: Flow. Vuur af!
+		init: function () {	// Start/initialiseer object router met daarin de Routie functie.
 			APP.router.init(); //Voer router init functie uit. init is voor best practice. INIT IS EEN METHOD. Een method = net als een functie: geassocieerd met een object. 
 			
 		}
@@ -127,11 +131,9 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
 		De flow van de APP. 
 	***************************************************/
 
-	// Literal object: 'router'.
-	APP.router = {
+	APP.router = { 	// Literal object: 'router'.
 		init: function () { 
-		//Routie kijkt naar wat achter de # komt achter de link en selecteert het. 
-	  		routie({
+	  		routie({	//Routie kijkt naar wat achter de # komt achter de link en selecteert het. 
 			    '/schedule': function() {
 			    	APP.page.schedule();
 				},
@@ -154,13 +156,10 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
 		},
 
 		
-		// Qwery: kleine DOM selector script voor het selecteren van section en data-route tags.
-		
-		//Method: change.
-		change: function () {
+		change: function () { //Method: change.
 			// Kijkt naar je URL inclusief hashtag. 
-            var route = window.location.hash.slice(2), //Slice??
-                sections = qwery('section'),
+            var route = window.location.hash.slice(2), //Slice 'snijdt' een deel van de link eruit. 3e character achter de hashtag.
+                sections = qwery('section'), // Qwery zorgt ervoor dat het elementen zoekt en selectert met CSS 1-3 queries.
                 section = qwery('[data-route=' + route + ']')[0];
 
             // Voeg 'active' class aan section toe, 
@@ -171,7 +170,7 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
             	section.classList.add('active');
             }
 
-            // Default route: Als anders dan route, voeg class 'active' toe aan section tag.
+            // Default route: Als anders dan route variable, voeg class 'active' toe aan section tag.
             if (!route) {
             	sections[0].classList.add('active');
             }
@@ -179,27 +178,9 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
 	};
 	
 
-    APP.page = {	// Literal object: page.
-        
-        
-        /*	Transparancy is een client-side template engine wat 'data-bind' met DOM. WERKING: .render(DATA); || data-bind=""
-
-         	Voorbeeld:
-			var hello = {
-			greeting: 'Hello',
-			name:     'world!'
-			};
-			
-			$('#template').render(hello); //jQuery DOM selector
-			
-			of 
-			
-			Transparency.render(document.getElementById('activities'), activities); //No JavaScript selector
-			
-        */      
-        
+    APP.page = {	// Literal object: page.                     
         schedule: function() {     // Method binnen een literal object: schedule.
-            Transparency.render(qwery('[data-route=schedule]')[0], APP.schedule);	// Qwery zorgt ervoor dat het elementen zoekt en selectert met CSS 1-3 queries. Werking: qwery('ELEMENT')';
+            Transparency.render(qwery('[data-route=schedule]')[0], APP.schedule);	// Transparancy is een client-side template engine wat 'data-bind' met DOM.. Qwery zorgt ervoor dat het elementen zoekt en selectert met CSS 1-3 queries.
             APP.router.change(); // Voer change method functie uit. Verander de class 'active'. [0] = eerste in de Array.
         },
         game: function() {
@@ -232,26 +213,65 @@ var APP = APP || { }; // Namespace. Zorgt ervoor dat je een nieuwe ruimte maakt 
 		APP.flow.init(); //start 'init'-method van 'flow'-object.
 	});
 
-
-
+	
+	
 	/*************************************************** 
-		EXTRA'S
+		UITLEG LIBRARIES
 	***************************************************/
 	
-	/*	microAjax werking:
-	
-		microAjax("/resource/url", function (res) {
-			alert (res);
-		});
-	*/	
-	
-	
-	/* JXS Ajax script werking:
-
-	jx.load('http://dennistel.nl/movies',function(data){
-		console.log(data);
-		},'text','get');
-	*/	
+	/*
+		Routie kijkt naar wat achter de # komt achter de link en selecteert het.
 		
+		.render();
+	*/		
+	
+	
+	/*	
+		Transparancy is een client-side template engine wat 'data-bind' met DOM. WERKING: Javascript: .render(DATA); && HTML: data-bind=""
+
+     	Voorbeeld:
+		var hello = {
+		greeting: 'Hello',
+		name:     'world!'
+		};
+		
+		$('#template').render(hello); //jQuery DOM selector
+		
+		of 
+		
+		Transparency.render(document.getElementById('activities'), activities); //JavaScript selector	
+	*/     
+		
+	
+	/*	
+		Qwery zorgt ervoor dat het elementen zoekt en selectert met CSS 1-3 queries.
+		
+		qwery('ELEMENT')';	
+	*/
+
+	
+	/*	
+		JXS Ajax script laadt data in met AJAX.
+
+		jx.load('http://dennistel.nl/movies',function(data){
+			console.log(data);
+		},'text','get');	
+	
+	*/	
+	
+	
+	/*
+		domready kijkt naar als pagina geladen is, zo ja: voer een functie uit. 
+		
+		domready(function () {		
+			//Doe iets		
+		});
+
+	*/
+	
+	
+	
+	
+	
 	
 })();	
