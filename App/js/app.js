@@ -72,10 +72,11 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 	    ]
 	};
 	
+	
 	APP.films = new Object(); 	// Constructor object 'films'.
 		// Properties:
     	APP.films.mainTitle = 'Films';
-    	APP.films.items = function() { 		
+    	APP.films.init = function() { 		
 	    	jx.load('http://dennistel.nl/movies', function(data) {
 				var data = JSON.parse(data); // Maak er JSON objecten van	
 				//console.log(data); //log wat er in de parameter 'data' zit			
@@ -85,21 +86,28 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 					    return this.cover; //return de property 'cover' van het JSON object.
 					    }
 					}
-				};
-				
+				};				
 			Transparency.render(qwery('[data-route=films]')[0], data, directives);
-			},'text','get'); //Haal data op als text.    		    	
+			},'text','get'); // Haal data op als text.    		    	
     	};	
 		
 		
 	APP.leaguevine = new Object(); 	// Constructor object 'leaguevine'.
 		// Properties:
 	    APP.leaguevine.mainTitle = 'Leaguevine';
-    	APP.leaguevine.items = function() { 
+    	APP.leaguevine.init = function() { 
+
+    	/* 	
+    		HTTPS request: https://www.leaguevine.com/oauth2/token/?client_id=6cfe84f67e52ee62c42cc49ce218b2&client_secret=12f1d6247377f7d9fd82e17ca94294&grant_type=client_credentials&scope=universal
+    		Client ID: 6cfe84f67e52ee62c42cc49ce218b2
+    		Client Secret Key: 12f1d6247377f7d9fd82e17ca94294 
+    		Acces Token: 40e50065ad
+    	*/
+    	
 	    	jx.load('https://api.leaguevine.com/v1/tournament_teams/?tournament_ids=%5B19389%5D&access_token=40e50065ad', function(data) {
 				var data = JSON.parse(data); // Maak er JSON objecten van
 				//console.log(data); //log wat er in de parameter 'data' zit	
-				var directives = { //Verander de manier van data-binden
+				var directives = { //Verander de manier van data-binden met Transparancy.
 					objects: { team: { leaguevine_url: { //Structuur van de JSON objecten. (objects > teams > leaguevine).
 				    	href: function() {
 						return this.leaguevine_url; //return de property 'leaguevine_url' van het JSON object.
@@ -109,10 +117,10 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 						}}}}
 				};
 			Transparency.render(qwery('[data-route=leaguevine]')[0], data, directives);
-			},'text','get'); //Haal data op als text.       		    	
+			},'text','get'); // Haal data op als text.       		    	
 		};	
 			
-
+			
 		
 	/*************************************************** 
 		START de flow van de APP.
@@ -188,15 +196,16 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
             APP.router.change();
         },
         ranking: function() {
+            
             Transparency.render(qwery('[data-route=ranking]')[0], APP.ranking);
             APP.router.change();
         },
         films: function() {
-			APP.films.items();
+			APP.films.init();
             APP.router.change();
         },
         leaguevine: function() {
-            APP.leaguevine.items();
+            APP.leaguevine.init();
             APP.router.change();
         }
     };
@@ -212,6 +221,8 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 		// Start/initialiseer controller en daarbij dus de hele applicatie
 		APP.flow.init(); //start 'init'-method van 'flow'-object.
 	});
+
+
 
 	
 	
@@ -264,7 +275,7 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 		domready kijkt naar als pagina geladen is, zo ja: voer een functie uit. 
 		
 		domready(function () {		
-			//Doe iets		
+			// Doe iets		
 		});
 
 	*/

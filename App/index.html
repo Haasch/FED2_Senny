@@ -101,18 +101,15 @@
 
 		<section data-route="films">			
 			<h1 data-bind="mainTitle"></h1>
+			<img data-bind="cover" src="" alt="" />
+			<h2 data-bind="title"></h2>
+			<p data-bind="description"></p>	
+			<p data-bind="release_date"></p>
 			
-			<section data-bind="items">
-				<img data-bind="cover" src="" alt="" />
-				<h2 data-bind="title"></h2>
-				<p data-bind="description"></p>	
-				<p data-bind="release_date"></p>
-				
-				<p> Rating: </p>
-				<div data-bind="reviews"> 
-					<span data-bind="score"> </span> ||
-				</div>		
-			</section>
+			<p> Rating: </p>
+			<div data-bind="reviews"> 
+				<span data-bind="score"></span> |
+			</div>		
 		</section>
 		
 		
@@ -136,7 +133,7 @@
 						<td data-bind="seed"></td>
 						<td data-bind="final_standing"></td>
 						<td> <a target="_blank" data-bind="leaguevine_url"></a></td>
-						<td data-bind="Twitter"></td>				
+						<td data-bind="Twitter"></td>		
 					</tr>	
 			    </tbody>
 			    
