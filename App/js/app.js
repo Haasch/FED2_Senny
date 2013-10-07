@@ -196,7 +196,7 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
             APP.router.change();
         },
         leaguevine: function() {
-            APP.leaguevine.items()
+            APP.leaguevine.items();
             APP.router.change();
         }
     };
@@ -269,9 +269,6 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 
 	*/
 	
-	
-	
-	
-	
+
 	
 })();	
