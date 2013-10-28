@@ -8,7 +8,7 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 
 (function () {
 	
-	'use strict'; 	// Scrict is een nieuwe feature in ECMAScript 5. daarmee kunnen we een programma of een functie in strict javascripttaal plaatsen. Het kijkt naar: fouten en schakelt features uit die slecht zijn bedacht. 
+	'use strict'; 	// Scrict is een nieuwe feature in ECMAScript 5. daarmee kunnen we een programma of een functie in strict javascripttaal plaatsen. Het kijkt naar fouten en schakelt features uit die slecht zijn bedacht. 
 
 
 	/*************************************************** 
@@ -76,26 +76,26 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 	APP.films = new Object(); 	// Constructor object 'films'.
 		// Properties:
     	APP.films.mainTitle = 'Films';
-    	APP.films.init = function() { 		
+    	APP.films.items = function() { 		
 	    	jx.load('http://dennistel.nl/movies', function(data) {
 				var data = JSON.parse(data); // Maak er JSON objecten van	
-				//console.log(data); //log wat er in de parameter 'data' zit			
-				var directives = { //Verander de manier van data-binden
+				//console.log(data); // log wat er in de parameter 'data' zit			
+				var directives = { // Verander de manier van data-binden
 					cover: {
 					    src: function() {
 					    return this.cover; //return de property 'cover' van het JSON object.
 					    }
 					}
-				};				
-			Transparency.render(qwery('[data-route=films]')[0], data, directives);
-			},'text','get'); // Haal data op als text.    		    	
-    	};	
-		
+				};	
+			Transparency.render(qwery('[data-route=films]')[0], data, directives);			
+			},'text','get'); // Haal data op als text.   			 		    	
+    	};	  	
+  			
 		
 	APP.leaguevine = new Object(); 	// Constructor object 'leaguevine'.
 		// Properties:
 	    APP.leaguevine.mainTitle = 'Leaguevine';
-    	APP.leaguevine.init = function() { 
+    	APP.leaguevine.items = function() { 
 
     	/* 	
     		HTTPS request: https://www.leaguevine.com/oauth2/token/?client_id=6cfe84f67e52ee62c42cc49ce218b2&client_secret=12f1d6247377f7d9fd82e17ca94294&grant_type=client_credentials&scope=universal
@@ -110,17 +110,43 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 				var directives = { //Verander de manier van data-binden met Transparancy.
 					objects: { team: { leaguevine_url: { //Structuur van de JSON objecten. (objects > teams > leaguevine).
 				    	href: function() {
-						return this.leaguevine_url; //return de property 'leaguevine_url' van het JSON object.
+						return this.leaguevine_url; // Return de property 'leaguevine_url' van het JSON object.
 						},
 						html: function(){
 						return "Link";	
-						}}}}
+						}
+					}}}
 				};
+
+				
 			Transparency.render(qwery('[data-route=leaguevine]')[0], data, directives);
 			},'text','get'); // Haal data op als text.       		    	
-		};	
+		};
+		
+		
+		APP.leaguevine.post = function() {
+					
+			// Plain JavaScript POST method.
+			var type = 'POST';
+			var url = 'https://api.leaguevine.com/v1/game_scores/';
+			var postData = JSON.stringify({
+			game_id: '127236',
+			team_1_score: '2',
+			team_2_score: '4',
+			is_final: 'False'
+			});
+			
+			// Create request
+			var http = new XMLHttpRequest();
+			http.open(type,url,true);
+			http.setRequestHeader('Content-type','application/json');
+			http.setRequestHeader('Authorization','bearer 40e50065ad');
+			http.send(postData);
 			
 			
+		};
+
+
 		
 	/*************************************************** 
 		START de flow van de APP.
@@ -164,9 +190,8 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 		},
 
 		
-		change: function () { //Method: change.
-			// Kijkt naar je URL inclusief hashtag. 
-            var route = window.location.hash.slice(2), //Slice 'snijdt' een deel van de link eruit. 3e character achter de hashtag.
+		change: function () { //Method: change. 
+            var route = window.location.hash.slice(2), // Kijkt naar je URL inclusief hashtag. Slice 'snijdt' een deel van de link eruit. 3e character achter de hashtag.
                 sections = qwery('section'), // Qwery zorgt ervoor dat het elementen zoekt en selectert met CSS 1-3 queries.
                 section = qwery('[data-route=' + route + ']')[0];
 
@@ -195,17 +220,17 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
             Transparency.render(qwery('[data-route=game]')[0], APP.game);
             APP.router.change();
         },
-        ranking: function() {
-            
+        ranking: function() {            
             Transparency.render(qwery('[data-route=ranking]')[0], APP.ranking);
             APP.router.change();
         },
         films: function() {
-			APP.films.init();
+			APP.films.items();
             APP.router.change();
         },
         leaguevine: function() {
-            APP.leaguevine.init();
+            APP.leaguevine.items();
+            APP.leaguevine.post();
             APP.router.change();
         }
     };
@@ -275,7 +300,7 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 		domready kijkt naar als pagina geladen is, zo ja: voer een functie uit. 
 		
 		domready(function () {		
-			// Doe iets		
+			// Do something.	
 		});
 
 	*/

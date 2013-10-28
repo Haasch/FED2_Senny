@@ -99,17 +99,22 @@
 			</table>		
 		</section>
 
-		<section data-route="films">			
-			<h1 data-bind="mainTitle"></h1>
-			<img data-bind="cover" src="" alt="" />
-			<h2 data-bind="title"></h2>
-			<p data-bind="description"></p>	
-			<p data-bind="release_date"></p>
-			
-			<p> Rating: </p>
-			<div data-bind="reviews"> 
-				<span data-bind="score"></span> |
-			</div>		
+		<section data-route="films">	
+			<section>		
+				<h1 data-bind="mainTitle"></h1>
+				<aside>
+					<img data-bind="cover" src="" alt="" />
+				</aside>
+					
+				<h2 data-bind="title"></h2>
+				<p data-bind="description"></p>	
+				<p data-bind="release_date"></p>
+				
+				<p>Rating:</p>
+				<div data-bind="reviews"> 
+					<span data-bind="score"></span> |
+				</div>	
+			</section>	
 		</section>
 		
 		
