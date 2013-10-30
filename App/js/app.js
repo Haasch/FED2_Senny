@@ -1,4 +1,3 @@
-
 /*************************************************** 
 	NAMESPACE 
 ***************************************************/
@@ -91,40 +90,45 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 			},'text','get'); // Haal data op als text.   			 		    	
     	};	  	
   			
-		
-	APP.leaguevine = new Object(); 	// Constructor object 'leaguevine'.
+	// [Review]	
+	//APP.leaguevine = new Object(); // Constructor object 'leaguevine'. [Review: dit is geen object constructor]
+	APP.leaguevine = {
 		// Properties:
-	    APP.leaguevine.mainTitle = 'Leaguevine';
-    	APP.leaguevine.items = function() { 
-
-    	/* 	
+		// APP.leaguevine.mainTitle = 'Leaguevine'; // [Review: Dit hoeft niet, je kan ook letterlijk Leaguevine in de html h1 zetten.]
+		
+		items: function() { 
+			
+    		/* 	
     		HTTPS request: https://www.leaguevine.com/oauth2/token/?client_id=6cfe84f67e52ee62c42cc49ce218b2&client_secret=12f1d6247377f7d9fd82e17ca94294&grant_type=client_credentials&scope=universal
     		Client ID: 6cfe84f67e52ee62c42cc49ce218b2
     		Client Secret Key: 12f1d6247377f7d9fd82e17ca94294 
     		Acces Token: 40e50065ad
-    	*/
+    		*/
     	
-	    	jx.load('https://api.leaguevine.com/v1/tournament_teams/?tournament_ids=%5B19389%5D&access_token=40e50065ad', function(data) {
+	    		jx.load('https://api.leaguevine.com/v1/tournament_teams/?tournament_ids=%5B19389%5D&access_token=40e50065ad', function(data) {
 				var data = JSON.parse(data); // Maak er JSON objecten van
 				//console.log(data); //log wat er in de parameter 'data' zit	
 				var directives = { //Verander de manier van data-binden met Transparancy.
-					objects: { team: { leaguevine_url: { //Structuur van de JSON objecten. (objects > teams > leaguevine).
-				    	href: function() {
-						return this.leaguevine_url; // Return de property 'leaguevine_url' van het JSON object.
-						},
-						html: function(){
-						return "Link";	
+					objects: { 
+						team: { 
+							leaguevine_url: { //Structuur van de JSON objecten. (objects > teams > leaguevine).
+				    				href: function() {
+									return this.leaguevine_url; // Return de property 'leaguevine_url' van het JSON object.
+								},
+								html: function(){
+									return "Link";	
+								}
+							}
 						}
-					}}}
+					}
 				};
 
 				
 			Transparency.render(qwery('[data-route=leaguevine]')[0], data, directives);
 			},'text','get'); // Haal data op als text.       		    	
-		};
+		},
 		
-		
-		APP.leaguevine.post = function() {
+		post: function() {
 					
 			// Plain JavaScript POST method.
 			var type = 'POST';
@@ -145,6 +149,10 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 			
 			
 		};
+		
+	}
+    	
+
 
 
 		
