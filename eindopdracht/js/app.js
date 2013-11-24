@@ -251,6 +251,8 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 					is_final: 'true'
 				});						
 				
+				//Zou je hier nog een alert kunnen toevoegen als post niet lukt?
+				
 				// Create POST request
 				var http = new XMLHttpRequest();
 				http.open(type,url,true);
