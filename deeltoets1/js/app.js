@@ -134,10 +134,10 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 			var type = 'POST';
 			var url = 'https://api.leaguevine.com/v1/game_scores/';
 			var postData = JSON.stringify({
-			game_id: '127236',
-			team_1_score: '2',
-			team_2_score: '4',
-			is_final: 'False'
+				game_id: '127236',
+				team_1_score: '2',
+				team_2_score: '4',
+				is_final: 'False'
 			});
 			
 			// Create request
@@ -148,9 +148,9 @@ var APP = APP || { }; // Namespace als globale object. Zorgt ervoor dat je een n
 			http.send(postData);
 			
 			
-		};
+		}
 		
-	}
+	};
     	
 
 

@@ -9,9 +9,10 @@ body {
 	font-weight: 300;
 	color:#333;
 	background-color: #fff;
+	cursor: all-scroll;
+	margin: 0;
 }
 h1 {
-	text-shadow: 1px 1px 1px #fff;
 	font-family: "Marker Felt";
 }
 p {
@@ -56,13 +57,17 @@ ul {
 		ul li a:hover {
 			background-color: #eee;
 		}
-
-section img, video {
-	max-width: 100%;
-	border:10px solid #eee;
-	box-shadow:0 0 5px #aaa;
-	border-radius: 5px;
-	margin-bottom: 1em;
+#loading-schedule, 
+#loading-game, 
+#loading-ranking,
+#loading-gamePost {
+	display: none;
+}
+#loading-schedule.active, 
+#loading-game.active, 
+#loading-ranking.active,
+#loading-gamePost.active {
+	display: block;
 }
 video {
 	width:100%;
@@ -75,11 +80,12 @@ figcaption {
 	color:#666;
 	font-style: italic;
 }
-
+#wrapper { 
+}
 /* header section */
 header {
 	position:relative;
-	padding:0 .5em;
+	padding-left: 0;
 }
 	header img {
 		opacity:.3;
@@ -92,16 +98,29 @@ header {
 		opacity:1;
 	}
 	header h1 {
-		font-family: "Marker Felt";
 		color:#000;
 		font-size: 1.6em;
-		margin-left:2.5em;
-
+		margin: 0;
+		background: #ddd;
+		padding: 20px;
+		color: #1e1e1e;
+		text-align: center;
+		font-weight: normal;
 	}
-
+	header h2 {
+		background: #1e1e1e;
+		font-size: 1.6em;
+		margin: 0 0 25px;;
+		padding: 10px;
+		color: #fff;
+		font-weight: normal;
+	}
 /* Content section */
 article#content {
 	clear:left;
+	width: 100%;
+	height: 100%;
+	min-height: 400px;
 }
 	article > section {
 		display:none;
@@ -127,7 +146,51 @@ aside {
 	aside img {
 		margin-bottom:1em;
 	}
-
+/* Section */
+#content section {
+	display: none;
+}
+#content section.active {
+	display: block;
+}
+.swiper-container, .swiper-slide { 
+	height: auto !important;
+}
+#pullDown span { display: none; }
+#pullDown span.active { display: block; }
+#pullDown, #pullUp {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #CCCCCC;
+    color: #888888;
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    padding: 5px 10px;
+}
+#pullDown .pullDownLabel {
+    background: url("../media/images/pull-icon@2x.png") no-repeat scroll 0 0 / 40px 80px rgba(0, 0, 0, 0);
+    float: left;
+    padding-left: 40px;
+    text-align: center;
+}
+#pullDown .pullReleaseLabel {
+    background: url("../media/images/pull-icon@2x.png") no-repeat scroll 0 0 / 40px 80px rgba(0, 0, 0, 0);
+    float: left;
+    padding-left: 40px;
+    text-align: center;
+}
+#pullDown .pullDownIcon {
+}
+#pullUp .pullUpIcon {
+}
+#pullDown.flip .pullDownIcon {
+}
+#pullUp.flip .pullUpIcon {
+}
+#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+    background-position: 0 100%;
+}
 /* Dead Simple Grid (c) 2012 Vladimir Agafonkin */
 
 .col {
@@ -154,6 +217,24 @@ aside {
 		   -moz-box-sizing: border-box;
 		        box-sizing: border-box;
 	}
+}
+
+/* Table */
+table{
+	width: 100%;
+	background-color: rgba(100, 200, 100, 0.2);
+	margin-bottom: 1em;
+}
+tr{
+	text-align: center;
+}
+tr:nth-child(even){
+	background-color: rgba(100, 200, 100, 0.2);
+}
+.winner:after{
+	content: "*"; 
+	color: red;
+	font-size: 180%;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -223,43 +304,7 @@ and (-webkit-min-device-pixel-ratio : 2) {
 /* Desktops and laptops ----------- */
 @media only screen 
 and (min-width : 1024px) {
-	nav {
-		position:relative;
-		padding:.2em;
-	}
-		nav ul li {
-			display:inline-block;
-			margin-right:.3em;
 
-		}
-			nav ul li a {
-				font-weight: normal;
-				display: inline-block;
-				background:#eee;
-				padding:5px 10px;
-				color:#333;
-				text-decoration: none;
-				border-radius: 5px;
-				-webkit-transition:all .2s ease;
-				border:none;
-			}
-			nav ul li a:hover {
-				background:#e0e0e0;
-				box-shadow:0 0 5px #aaa;
-				color:#333;
-			}
-
-	.col {
-		width:50%;
-	}
-	aside {
-		text-align:left;
-	}
-		aside img {
-			float:left;
-			width:25%;
-			margin-right:3%;
-		}
 }
 
 /* Large screens ----------- */

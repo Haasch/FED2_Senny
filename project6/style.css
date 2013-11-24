@@ -1,0 +1,273 @@
+/*
+	Name: COGENDA
+*/
+
+
+/*		 		 	 
+	WEBSITE COLORS:
+	background color: #;
+	Normal text-color: #;	
+	Ancor text-color: #;	
+	Special color: #;
+*/
+
+
+
+/* =RESET
+-------------------------------------------------------------- */
+
+*									{ margin: 0; padding: 0; outline: 0;  vertical-align: baseline; font-size: 100%; }
+html								{ font-size: 62.5%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body								{ font-family: 'Helvetica', sans-serif; font-size: 13px; color: #333; }
+ul, ol								{ list-style: none; }
+a img								{ border: 0; }
+a:hover, a:active 					{ outline: 0; }
+a:focus 							{ outline: 0; }
+img									{ vertical-align: none; height: auto; max-width: 100%; }
+table								{ border-collapse: collapse; }
+blockquote, q 						{ quotes: "" ""; }
+
+blockquote:before,
+blockquote:after, 
+q:before, 
+q:after 							{ content: ""; }
+
+caption, th, td 					{ font-weight: normal; text-align: left; }
+input, textarea						{  }
+table 								{ border-collapse: separate; border-spacing: 0; }
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+nav,
+section 
+{
+	display: block;
+}
+
+
+
+/*
+-------------------------------------------------------------- */
+
+
+
+/*
+	TYPGROGRAPHY
+*/
+
+p, li								{ line-height: 12px; }
+a									{ color: ; text-decoration: none; cursor: pointer; }
+a:hover								{ }
+
+h1									{ font-size: 30px; }
+h1 a								{ color: #fff; text-decoration: none; font-weight: normal; }
+h1 a:hover							{ text-decoration: none; }
+
+h2									{ font-size: 22px; font-weight: normal; }
+h2 a								{ }
+h2 a:hover							{ }
+
+h3									{ font-size: 20px; font-weight: normal; }
+h3 a								{ }
+h3 a:hover							{ }
+
+h4									{ font-size: 18px; font-weight: normal; }
+h4 a								{ }
+h4 a:hover							{ }
+
+
+h5									{ font-size: 16px; }
+h5 a								{ }
+h5 a:hover							{ }
+
+
+
+/*
+	UTILITIES / WORDPRESS CORE
+*/
+
+.floatleft 							{ float: left; }
+.floatright							{ float: right; }
+
+img.alignright 						{ float: right; }
+img.alignleft 						{ float: left; }
+img.aligncenter						{ display: block; margin: 0 auto; }
+
+.alignright 						{ float: right; }
+.alignleft							{ float: left; }
+.aligncenter						{ display: block; margin: 0 auto; }
+
+.clear								{ clear: both; }
+.clearfix:after 					{ content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+.clearfix							{ display: block; }
+html[xmlns] .clearfix 				{ display: block; }
+* html .clearfix 					{ height: 1%; }
+
+
+/*
+	STRUCTURE
+*/
+
+#wrapper, #header, #slider, #content, #primary, #secondary, #footer { 
+	position: relative;
+	margin-bottom: 1.5em;
+}
+
+#header								{ }
+
+#wrapper							{ min-width: 300px; }
+
+#content							{ }
+
+#footer								{ }			
+
+
+	
+/*
+	HEADER
+*/
+
+#header					{ background: #004056; padding: 20px 0; }
+#header h1				{ color: #fff; text-align: center; }
+
+
+
+/*
+	TEMPLATES RESET
+*/
+
+section					{ display: none; width: 80%;}
+section.active			{ display: block; margin: 0 auto; text-align: center; }
+section#inchecken > footer primary-navigation { display: none; }
+
+section .description	{ text-align: center; margin: 0 0 30px; line-height: 40px; }
+
+#wrapper.login #primary-navigation	{ display: none; }
+
+/*
+	INCHECKEN
+*/
+#inchecken input		{ width: 98%; margin: 10px 0; padding: 1%; }
+
+
+
+
+
+/*
+	HOME - AGENDA
+*/
+
+
+
+/* 
+	WiIZARD
+*/
+
+
+/*
+	NOTIFICATIES
+*/
+
+
+
+/*
+	SINGLE CUSTOM-POST-TYPE TEMPLATE
+*/
+
+
+
+/*
+	SIDEBARS
+*/
+#secondary						{ }
+
+
+
+
+/*
+	WIDGETS
+*/
+.widget							{ margin: 0 0 1.5em; }
+
+
+
+
+
+/*
+	SEARCHFORM
+*/
+#searchform						{ }
+#searchform #textfield			{ }
+#searchform #submit				{ }
+
+
+
+/*
+	GRAVITY FORMS
+*/
+
+.gform_wrapper 					{ }
+
+
+
+/*
+	FOOTER
+*/
+
+#footer							{ }
+
+	/* 	MENU  */
+	#primary-navigation									{ position: fixed; bottom; background: #004056; overflow: hidden; width: 100%; min-width: 300px; }
+	#primary-navigation	ul li							{ float: left; width: 50%; }
+	#primary-navigation	ul li a							{ color: #fff; display: block; padding: 20px; text-align: center; }
+	#primary-navigation	ul li a:hover					{ }
+	#primary-navigation	ul .current-menu-item a 		{ }
+	#primary-navigation	ul .current-menu-parent a 		{ }
+	#primary-navigation	ul #menu-item- a				{ margin: 0 !important; border: none !important; }
+	#primary-navigation	a#pull 							{ display: none;  }  
+
+
+
+
+/*
+	RESPONSIVE SMARTPHONE CSS
+*/
+@media only screen and (max-width : 480px) {  
+
+
+}
+
+
+
+
+/*
+	RETINA DISPLAY CSS
+*/
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    /* Retina-specific stuff here */
+}
+
+
+/*
+	GOOGLE CHROME CSS
+*/
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+/* Put here your code you want to change for the webkit webbrowsers like Chrome & Safari. **Example: .selector { color: red; }**  */
+}
+
+
+
+/*
+	MOZILLA FIREFOX CSS
+*/
+
+@-moz-document url-prefix() { 
+/* Put here your code you want to change for the Gecko webbrowsers like Firefox. **Example: .selector { color: red; }**  */
+}
